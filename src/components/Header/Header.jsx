@@ -18,7 +18,7 @@ function Header() {
 
   return (
     <nav className=" navbar fixed-top bg-white border-bottom">
-      <div className="container">
+      <div className="container-fluid px-5">
         <Link to="/" className="navbar-brand" style={{ cursor: "pointer" }}>
          <h3 style={{fontWeight:"bold"}}> Bobs Best Clothes</h3>
         </Link>

@@ -4,21 +4,6 @@ import { CategoryContext } from "../../App";
 
 function CategoryList({ setFilterCategory }) {
  const {categories} = useContext(CategoryContext)
- console.log(categories)
-/*   const [categories, setCategories] = useState([]); */
-
-/*   useEffect(() => {
-    fetchCategories();
-  }, []);
-
-  const fetchCategories = () => {
-    fetch("http://localhost:4000/categories")
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.data, "categories");
-        setCategories(data.data);
-      });
-  }; */
 
   return (
     <div>

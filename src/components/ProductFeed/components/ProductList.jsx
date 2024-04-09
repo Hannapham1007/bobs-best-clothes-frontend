@@ -7,9 +7,6 @@ import { Link } from "react-router-dom";
 
 function ProductList({ filterText, filterCategory }) {
   const { products } = useContext(ProductContext);
-  
-  console.log(filterCategory, "filterCat")
-  console.log(products)
 
   // Filter products based on search text or category
   const filteredProducts = products.filter((item) => {
@@ -28,7 +25,7 @@ function ProductList({ filterText, filterCategory }) {
         <p>No products found</p>
       ) : (
         filteredProducts.map((item) => (
-          <div key={item.id} className="col-md-4 mb-4 p-4">
+          <div key={item.id} className="col-md-4 mb-3">
             <Link to={`/product/${item.id}`} style={{ textDecoration: 'none' }}>
               <ProductItem product={item} />
             </Link>

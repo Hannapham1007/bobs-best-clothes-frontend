@@ -11,23 +11,19 @@ function ProductFeed() {
   const [filterText, setFilterText] = useState("");
 
   return (
-    <div className="container pt-5" style={{ marginTop: "50px" }}>
-      <div className="row align-items-center justify-content-center">
-        <div className="col-md-10 col-12">
-          <SearchBar filterText={filterText} setFilterText={setFilterText} />
+    <section className="container-fluid pt-5" style={{ marginTop: "50px" }}>
+      <div className="row align-items-center justify-content-center px-4">
+        <div className="col-md-9 col-12">
+        <SearchBar filterText={filterText} setFilterText={setFilterText} />
         </div>
-        <div className="col-md-2 col-12">
-          <CategoryList setFilterCategory={setFilterCategory}> </CategoryList>
-
-          {/* <SideBar setFilterCategory={setFilterCategory}></SideBar> */}
+        <div className="col-md-3 col-12">
+        <CategoryList setFilterCategory={setFilterCategory}> </CategoryList>
         </div>
-
       </div>
-      {/* Product List */}
       <div className="col-md-12 p-4">
         <ProductList filterText={filterText} filterCategory={filterCategory} />
       </div>
-    </div>
+    </section>
   );
 }
 
