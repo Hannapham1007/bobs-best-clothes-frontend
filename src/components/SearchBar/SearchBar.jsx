@@ -1,25 +1,29 @@
-/* eslint-disable react/prop-types */
+import { FaSearch } from 'react-icons/fa';
 
 function SearchBar({ filterText, setFilterText }) {
-  const handleChange = (e) => {
-    setFilterText(e.target.value);
-  };
   return (
-    <div>
-      <form style={{ borderRadius: "10px" }}>
-        <input
-          type="text"
-          placeholder="Search ..."
-          value={filterText}
-          onChange={handleChange}
-          style={{
-            borderRadius: "10px",
-            padding: "8px 12px",
-            width: "80%",
-            border: "1px solid lightgrey",
-          }}
-        ></input>
-      </form>
+    <div style={{ position: 'relative' }}>
+      <input
+        type="text"
+        value={filterText}
+        onChange={(e) => setFilterText(e.target.value)}
+        placeholder="Search for a product"
+        style={{
+          width: '100%',
+          padding: '8px 10px 8px 40px', 
+          borderRadius: '5px',
+          border: '1px solid #ccc',
+        }}
+      />
+      <FaSearch
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '10px', 
+          transform: 'translateY(-50%)',
+          fontSize: '18px'
+        }}
+      />
     </div>
   );
 }

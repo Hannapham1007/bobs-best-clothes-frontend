@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CategoryContext } from "../../App";
+import { useNavigate } from 'react-router-dom';
+
 
 function CategoryForm() {
+  const navigate = useNavigate();
+
   const [categoryInput, setCategoryInput] = useState({
     name: "",
     description: "",
@@ -50,39 +54,48 @@ function CategoryForm() {
     }
   };
 
-
+  const handleNavigate = () =>{
+    navigate('/profile');
+  }
 
   return (
-    <div className="container push-down">
-      <h2 style={{ fontWeight: "bold", textAlign: "center" }}>
+    <div className="push-down-2">
+      <h2 className="text-center fw-bold pb-4">
         Create A New Category
       </h2>
+    <div className="container col-md-6 col-11 rounded-3 p-4 "style={{ background: "var(--product-item-background" }}>
+
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label className="form-label">Category name</label>
+          <label className="form-label fw-bold mb-0">Category name</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Category name"
+            placeholder="Enter category name"
             name="name"
             value={categoryInput.name}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
-          <label className="form-label">Description</label>
+          <label className="form-label fw-bold mb-0">Description</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Description"
+            placeholder="Enter category description"
             name="description"
             value={categoryInput.description}
             onChange={handleChange}
           />
         </div>
+        <div className="d-flex justify-content-center">
+        <button className="btn btn-outline" onClick={handleNavigate}>Cancel</button>
         <button className="btn btn-dark">Submit</button>
+        </div>
       </form>
     </div>
+    </div>
+
   );
 }
 

@@ -9,32 +9,28 @@ function ProfileNavbar({showState, setShowState}) {
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
         <div className="navbar-nav mx-auto"> {}
-          <p
-            className={`nav-link ${showState === 'orders' ? 'fw-bold' : ''}`}
+          <p 
+            className={`nav-link profile-nav ${showState === 'orders' ? 'fw-bold' : ''}`}
             onClick={() => setShowState('orders')}
-            style={{ cursor: 'pointer' }} 
           >
             Orders
           </p>
           <p
-            className={`nav-link ${showState === 'info' ? 'fw-bold' : ''}`}
+            className={`nav-link profile-nav  ${showState === 'info' ? 'fw-bold' : ''}`}
             onClick={() => setShowState('info')}
-            style={{ cursor: 'pointer' }} 
           >
-            Info
+            Account
           </p>
           {(isAdmin) && 
           
              <><p
-              className={`nav-link`}
-              onClick={() => window.location.href = '/createProduct'}
-              style={{ cursor: 'pointer' }}
+              className={`nav-link profile-nav`}
+              onClick={() => window.location.href = '/create-product'}
             >
               Create Product
             </p><p
-              className={`nav-link`}
-              onClick={() => window.location.href = '/createCategory'}
-              style={{ cursor: 'pointer' }}
+              className={`nav-link profile-nav`}
+              onClick={() => window.location.href = '/create-category'}
             >
                 Create Category
               </p></>

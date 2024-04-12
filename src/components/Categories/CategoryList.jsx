@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import { Dropdown } from "react-bootstrap";
+import { useContext } from "react";
 import { CategoryContext } from "../../App";
 
 function CategoryList({ setFilterCategory }) {
@@ -18,7 +17,7 @@ function CategoryList({ setFilterCategory }) {
           padding: "6px 12px",
         }}
       >
-        <option value=""> All products</option>
+        <option value=""> ALL PRODUCTS</option>
         {categories.map((category) => (
           <option
             key={category.id}
@@ -33,21 +32,3 @@ function CategoryList({ setFilterCategory }) {
 }
 
 export default CategoryList;
-{
-  /**      <Dropdown  onSelect={(e) => setFilterCategory(e.target.value)} >
-        <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-          Filter Categories
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item key={0} onSelect={() => setFilterCategory('')}>
-            All products
-          </Dropdown.Item>
-          {categories.map((category) => (
-            <Dropdown.Item key={category.id} onSelect={() => {
-               setFilterCategory(category.name) }}>
-              {category.name}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown> */
-}

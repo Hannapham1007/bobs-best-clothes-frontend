@@ -10,16 +10,15 @@ body {
 
 :root {
   --button-background: #131313;
-  --product-item-background: #efefef;
+  --product-item-background: #f8f8f8;
   --text-color: #0f1110;
 }
 
 .push-down{ 
-  margin-top: 100px; 
+  margin-top: 80px; 
 }
-
-.sidebar {
-  background-color: rgb(218, 218, 218);
+.push-down-2{
+  margin-top: 150px;
 }
 
 /*   CATEGORY LIST */
@@ -48,7 +47,22 @@ body {
 ul{
   list-style: none;
 }
+button{
+  cursor: pointer;
+}
 
+.btn-outline {
+  border-color: var(--button-background);
+  border: 2px solid  var(--button-background);
+  color: var var(--button-background);
+  margin: 0 12px;
+}
+/*
+.btn-outline:hover {
+  background-color: var(--button-background);
+  color: white;
+}
+*/
 /*PAGINATION ORDERS LIST*/
 
 .page-item.active .page-link {
@@ -68,4 +82,25 @@ select.form-select{
   text-decoration: none;
   color: var(--text-color);
   margin-right: 20px;
+}
+
+/*PROFILE NAVBAR*/
+.profile-nav{
+  cursor: pointer;
+  text-transform: uppercase;
+}
+.profile-nav:hover{
+  border-bottom: 3px solid var(--text-color);
+  font-weight: bold;
+  
+}
+
+.label-login-signin-form{
+  text-align: left;
+}
+.btn-link{
+  color: var(--text-color);
+}
+.btn-link:hover{
+  color: var(--text-color);
 }

@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./../../../App.css"
 
 function SignUpForm({setDisplayState}) {
-  
     const [role, setRole] = useState("")
     const [signUpCredentials, setSignUpCredentials] = useState(
       {
@@ -15,6 +14,7 @@ function SignUpForm({setDisplayState}) {
         role: ['user'],
       }
     )
+  
 
     const handleChange = (event) => {
       const {name, value} = event.target; 
@@ -47,11 +47,12 @@ function SignUpForm({setDisplayState}) {
         })
         if(!res.ok){
           console.error("Failed to create account")
-          alert("failed to create account")
+          alert("Failed to create account")
         }
         else{
           console.log("Account created") 
-          setDisplayState("login")
+          alert(" Your account was successfully created!")
+          setDisplayState("login");
         }
       }
       catch (error){
@@ -60,45 +61,49 @@ function SignUpForm({setDisplayState}) {
     };
 
   return (
-    <div className="container mt-5">
+    <div className="container push-down-2">
       <div className="row justify-content-center">
         <div className="col-md-6">
           <div className="card">
-            <div className="card-header">Sign Up</div>
-            <div className="card-body">
+            <div className="card-header fw-bold text-uppercase">Sign Up</div>
+            <div className="card-body text-start">
               <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                  <label htmlFor="role" className="form-label">Role</label>
-                  <select className="form-select" name="role" value={role} onChange={handleChange} required>
+                  <label htmlFor="role" className="form-label fw-bold mb-0">Role</label>
+                  <select className="form-select" name="role" value={role} onChange={handleChange} required  style={{
+                padding: "6px 12px",
+              }}>
                     <option value="user">User</option>
                     <option value="admin">Admin</option>
                   </select>
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="username" className="form-label">Username</label>
+                  <label htmlFor="username" className="form-label fw-bold mb-0">Username</label>
                   <input type="username" className="form-control" name="username" placeholder="Enter username" value={signUpCredentials.username} onChange={handleChange} required />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="firstname" className="form-label">First Name</label>
-                  <input type="firstname" className="form-control" name="firstname" placeholder="Enter First name" value={signUpCredentials.firstname} onChange={handleChange} required />
+                  <label htmlFor="firstname" className="form-label fw-bold mb-0">First Name</label>
+                  <input type="firstname" className="form-control" name="firstname" placeholder="Enter first name" value={signUpCredentials.firstname} onChange={handleChange} required />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="lastname" className="form-label">Last Name</label>
-                  <input type="lastname" className="form-control" name="lastname" placeholder="Enter Last name" value={signUpCredentials.lastname} onChange={handleChange} required />
+                  <label htmlFor="lastname" className="form-label fw-bold mb-0">Last Name</label>
+                  <input type="lastname" className="form-control" name="lastname" placeholder="Enter last name" value={signUpCredentials.lastname} onChange={handleChange} required />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="phone" className="form-label">Phone number</label>
+                  <label htmlFor="phone" className="form-label fw-bold mb-0">Phone number</label>
                   <input type="phone" className="form-control" name="phone" placeholder="Enter phone number" value={signUpCredentials.phone} onChange={handleChange} required />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
+                  <label htmlFor="email" className="form-label fw-bold mb-0">Email address</label>
                   <input type="email" className="form-control" name="email" placeholder="Enter email" value={signUpCredentials.email} onChange={handleChange} required />
                 </div>        
                 <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input type="password" className="form-control" name="password" placeholder="Password" value={signUpCredentials.password} onChange={handleChange} required />
+                  <label htmlFor="password" className="form-label fw-bold mb-0">Password</label>
+                  <input type="password" className="form-control" name="password" placeholder="Enter password" value={signUpCredentials.password} onChange={handleChange} required />
                 </div>
+                <div className="d-flex justify-content-center">
                 <button type="submit" className="btn btn-dark">Sign Up</button>
+                </div>
               </form>
             </div>
           </div>

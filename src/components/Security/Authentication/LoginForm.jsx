@@ -1,7 +1,9 @@
 import { useState } from "react";
-import "./../../../App.css"
+import "./../../../App.css";
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const navigate = useNavigate();
     const [failedLogin, setFailedLogin] = useState(false) 
     const [loginCredentials, setLoginCredentials] = useState(
        {
@@ -52,6 +54,8 @@ function LoginForm() {
             username: "",
             password: ""
           })
+
+          navigate('/');
         }
       } catch (error) {
         console.error('Error:', error);
@@ -79,23 +83,25 @@ function LoginForm() {
     
 
   return (
-    <div className="container mt-5">
-    <div className="row justify-content-center ">
+    <div className="container push-down-2">
+    <div className="row justify-content-center">
       <div className="col-md-6">
         <div className="card">
-          <div className="card-header">Login</div>
-          <div className="card-body">
+          <div className="card-header fw-bold text-uppercase">Log in</div>
+          <div className="card-body text-start">
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
-                <label htmlFor="username" className="form-label">Username</label>
+                <label htmlFor="username" className="form-label fw-bold mb-0">Username</label>
                 <input type="username" className="form-control" name="username" placeholder="Enter username" value={loginCredentials.username} onChange={handleChange} required />
               </div>
               <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" name="password" placeholder="Password" value={loginCredentials.password} onChange={handleChange} required />
+                <label htmlFor="password" className="form-label fw-bold mb-0">Password</label>
+                <input type="password" className="form-control" name="password" placeholder="Enter password" value={loginCredentials.password} onChange={handleChange} required />
               </div>
               {(failedLogin) && <p style={{color: "red"}}>Wrong password or username</p>}
-              <button type="submit" className="btn btn-dark">Login</button>
+              <div className="d-flex justify-content-center">
+              <button type="submit" className="btn btn-dark">Log in</button>
+              </div>
             </form>
           </div>
         </div>

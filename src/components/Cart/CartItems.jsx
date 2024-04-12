@@ -4,7 +4,7 @@ import { CartContext, OrderContext } from "../../App";
 import { Link } from "react-router-dom";
 import "./../../App.css"
 import CartItem from "./CartItem";
-import PopUp from "../Pop-up-order/PopUp";
+import PopUp from "../PopUps/PopUp";
 
 function CartItems() {
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
@@ -99,7 +99,7 @@ function CartItems() {
 
   return (
     <section className="cart">
-      <div className="container col-md-7 push-down">
+      <div className="container col-md-7 push-down-2">
         <h2 style={{ textAlign: "center", fontWeight: "bold" }}>
           Your shopping cart
         </h2>
