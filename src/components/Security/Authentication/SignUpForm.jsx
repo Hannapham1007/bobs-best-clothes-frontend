@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./../../../App.css"
 
 function SignUpForm({setDisplayState}) {
+    const API_URL = import.meta.env.VITE_API_URL;
     const [role, setRole] = useState("")
     const [signUpCredentials, setSignUpCredentials] = useState(
       {
@@ -40,7 +41,7 @@ function SignUpForm({setDisplayState}) {
 
       //PostReq
       try {
-        const res = await fetch("http://localhost:4000/auth/signup", {
+        const res = await fetch(`${API_URL}/auth/signup`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(signUpCredentials)
@@ -68,15 +69,7 @@ function SignUpForm({setDisplayState}) {
             <div className="card-header fw-bold text-uppercase">Sign Up</div>
             <div className="card-body text-start">
               <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                  <label htmlFor="role" className="form-label fw-bold mb-0">Role</label>
-                  <select className="form-select" name="role" value={role} onChange={handleChange} required  style={{
-                padding: "6px 12px",
-              }}>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
+              
                 <div className="mb-3">
                   <label htmlFor="username" className="form-label fw-bold mb-0">Username</label>
                   <input type="username" className="form-control" name="username" placeholder="Enter username" value={signUpCredentials.username} onChange={handleChange} required />

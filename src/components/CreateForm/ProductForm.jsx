@@ -3,6 +3,7 @@ import { CategoryContext } from "../../App";
 import { useNavigate } from 'react-router-dom';
 
 function ProductForm() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
   const [category, setCategory] = useState({});
   const [productInput, setProductInput] = useState({
@@ -13,7 +14,6 @@ function ProductForm() {
     categoryId: 0,
   });
   const { categories } = useContext(CategoryContext);
-  console.log(categories);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -31,18 +31,14 @@ function ProductForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = localStorage.getItem("token");
-    console.log(token);
 
-    console.log(productInput);
-    console.log(category);
     try {
-      const result = await fetch("http://localhost:4000/products", {
+      const result = await fetch(`${API_URL}/products`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(productInput),
       });
       if (!result.ok) {
-        console.log("Failed to create product");
         setProductInput({
           title: "",
           description: "",
@@ -51,7 +47,6 @@ function ProductForm() {
           category: "",
         });
       } else {
-        console.log("Product created");
         const data = await result.json();
         console.log(data);
         setProductInput({

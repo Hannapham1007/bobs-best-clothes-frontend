@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function CategoryForm() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [categoryInput, setCategoryInput] = useState({
@@ -22,12 +23,10 @@ function CategoryForm() {
   };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(categoryInput);
     const token = localStorage.getItem('token')
-    console.log(token)
-    console.log(loggedInUser)
+    
     try{
-      const result = await fetch("http://localhost:4000/categories",
+      const result = await fetch(`${API_URL}/categories`,
       {
         method:"POST",
         headers:{'Content-Type':'application/json', 'Authorization': `Bearer ${token}`},
@@ -42,7 +41,6 @@ function CategoryForm() {
       }else{
         console.log("Category created")
         const data = await result.json();
-        console.log(data);
         setCategoryInput({
           name:"",
           description:""

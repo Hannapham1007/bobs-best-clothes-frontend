@@ -8,7 +8,6 @@ import ProfileNavbar from "./components/ProfileNavbar";
 function Profile() {
   const [showState, setShowState] = useState("info"); 
   const loggedInUser = localStorage.getItem("loggedInUser");
-  console.log(loggedInUser);
 
   if(!loggedInUser){
     return (

@@ -3,6 +3,7 @@ import "./../../../App.css";
 import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
     const [failedLogin, setFailedLogin] = useState(false) 
     const [loginCredentials, setLoginCredentials] = useState(
@@ -24,9 +25,8 @@ function LoginForm() {
   
     const handleSubmit = async (e) => {
       e.preventDefault();
-      console.log(loginCredentials);
       try {
-        const res = await fetch("http://localhost:4000/auth/signin", {
+        const res = await fetch(`${API_URL}/auth/signin`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json'},
           body: JSON.stringify(loginCredentials)
@@ -40,11 +40,9 @@ function LoginForm() {
           })
         } else {
 
-          console.log("Login successful");
           setFailedLogin(false)
           
           const data = await res.json();
-          console.log(data);
 
           const jwtToken = data.token
           localStorage.setItem('token', jwtToken);
@@ -63,7 +61,7 @@ function LoginForm() {
     };
 
     const fetchUser = (id) => {
-      fetch(`http://localhost:4000/users/${id}`)
+      fetch(`${API_URL}/users/${id}`)
         .then((res) => {
           console.log(res)
           if (!res.ok) {

@@ -7,12 +7,13 @@ import CartItem from "./CartItem";
 import PopUp from "../PopUps/PopUp";
 
 function CartItems() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const { cart, setCart, setTotalPrice, totalPrice } = useContext(CartContext);
   const { setOrders, orders } = useContext(OrderContext);
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   const [showPopUp, setShowPopUp] = useState(false);
 
-  console.log(cart)
+
   //Update total every time the cart changes
   useEffect(() => {
     calculateTotal();
@@ -66,11 +67,10 @@ function CartItems() {
         total: totalPrice
       };
       const token = localStorage.getItem('token')
-      console.log(token)
   
       //Post to database if the user is authenticated
       try {
-        const res = await fetch("http://localhost:4000/orders", {
+        const res = await fetch(`${API_URL}}/orders`, {
           method: "POST",
           headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
           body: JSON.stringify(newOrder)

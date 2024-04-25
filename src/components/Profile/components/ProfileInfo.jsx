@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 function ProfileInfo() {
   const localUser = JSON.parse(localStorage.getItem("loggedInUser"));
   const navigate = useNavigate();
-  console.log(localUser);
 
   const handleNavigate = () => {
     navigate(`/profile/${localUser.id}/edit`);

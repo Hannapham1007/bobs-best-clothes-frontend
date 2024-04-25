@@ -20,6 +20,7 @@ const OrderContext = createContext();
 const UserContext = createContext();
 
 function App() {
+  const API_URL = import.meta.env.VITE_API_URL;
   
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
@@ -31,28 +32,25 @@ function App() {
   const [users, setUsers] = useState([]);
 
   const fetchProducts = () => {
-    fetch("http://localhost:4000/products")
+    fetch(`${API_URL}/products`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
         setProducts(data.data);
       });
   };
 
   const fetchCategories = () => {
-    fetch("http://localhost:4000/categories")
+    fetch(`${API_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
         setCategories(data.data);
       });
   };
 
   const fetchUsers = () =>{
-    fetch("http://localhost:4000/users")
+    fetch(`${API_URL}/users`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
         setUsers(data.data);
       });
   }
@@ -64,7 +62,6 @@ function App() {
     fetchUsers();
   }, []);
 
-  //console.log(cart);
   return (
     <>
     <UserContext.Provider value={{users: users, setUsers: setUsers}}>

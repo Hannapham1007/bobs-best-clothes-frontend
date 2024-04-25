@@ -4,6 +4,7 @@ import OrderItem from "./OrderItem";
 import {useNavigate} from "react-router-dom";
 
 function OrderList() {
+  const API_URL = import.meta.env.VITE_API_URL;
   const { orders, setOrders } = useContext(OrderContext);
   const reverseOrders = [...orders].reverse();
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,9 +29,7 @@ function OrderList() {
 
   const fetchOrders = () => {
     const token = localStorage.getItem("token");
-    console.log(token);
-    console.log(loggedInUser.id);
-    fetch(`http://localhost:4000/orders/${loggedInUser.id}`, {
+    fetch(`${API_URL}/orders/${loggedInUser.id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -39,7 +38,6 @@ function OrderList() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
         setOrders(data.data);
       });
   };

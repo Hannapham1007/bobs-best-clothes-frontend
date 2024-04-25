@@ -3,6 +3,7 @@ import {  useNavigate, useParams } from "react-router-dom";
 import { UserContext } from '../../../App';
 
 function EditProfileInfo() {
+    const API_URL = import.meta.env.VITE_API_URL;
     const {id} = useParams();
     const {users, setUsers} = useContext(UserContext);
     const [role, setRole] = useState("");
@@ -53,7 +54,7 @@ function EditProfileInfo() {
         event.preventDefault();
     
         try {
-            const res = await fetch(`http://localhost:4000/users/${id}`, {
+            const res = await fetch(`${API_URL}/users/${id}`, {
                 method: "PUT",
                 headers: { 'Content-Type': 'application/json'},
                 body: JSON.stringify(signUpCredentials)
@@ -63,7 +64,6 @@ function EditProfileInfo() {
                 alert("Failed to update account");
             } else {
               fetchUsers();
-                console.log("Account updated");
                 alert("Your account was successfully updated!");
                 updateLocalStorageUser(signUpCredentials);
                 navigate('/profile');
@@ -74,10 +74,9 @@ function EditProfileInfo() {
     };
 
     const fetchUsers = () =>{
-      fetch("http://localhost:4000/users")
+      fetch(`${API_URL}/users`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data);
           setUsers(data.data);
         });
     }
