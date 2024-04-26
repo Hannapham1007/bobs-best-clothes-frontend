@@ -32,7 +32,6 @@ function LoginForm() {
           body: JSON.stringify(loginCredentials)
         });
         if (!res.ok) {
-          console.error("Failed to login");
           setFailedLogin(true)
           setLoginCredentials({
             username: "",
@@ -70,7 +69,6 @@ function LoginForm() {
           return res.json();
         })
         .then((data) => {
-          console.log(data.data);
           localStorage.setItem("loggedInUser", JSON.stringify(data.data));
           window.location.reload();
         })

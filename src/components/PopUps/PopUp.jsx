@@ -1,7 +1,14 @@
 import { Button, Modal } from 'react-bootstrap';
 
+import { useNavigate } from 'react-router-dom';
 
 function PopUp({show, setShow, placeOrder}) {
+  const navigate = useNavigate();
+
+  const handleNavigate = () =>{
+    navigate('/authentication');
+  }
+
 
   return (
     <>
@@ -13,8 +20,7 @@ function PopUp({show, setShow, placeOrder}) {
         <Modal.Footer>
         <div className="d-flex justify-content-between w-100">
         <Button className="btn btn-dark"variant="secondary" onClick={() => {
-              window.location.href = '/authentication';
-          setShow(false)
+          handleNavigate();        
         }}>
             Log in to save your order
         </Button>

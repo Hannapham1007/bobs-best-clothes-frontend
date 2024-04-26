@@ -37,7 +37,6 @@ function SignUpForm({setDisplayState}) {
       if(role === "admin"){
         signUpCredentials.role.push('admin')
       }
-      console.log(signUpCredentials)
 
       //PostReq
       try {
@@ -47,11 +46,9 @@ function SignUpForm({setDisplayState}) {
           body: JSON.stringify(signUpCredentials)
         })
         if(!res.ok){
-          console.error("Failed to create account")
           alert("Failed to create account")
         }
         else{
-          console.log("Account created") 
           alert(" Your account was successfully created!")
           setDisplayState("login");
         }
