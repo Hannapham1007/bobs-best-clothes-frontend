@@ -8,7 +8,6 @@ function DetailedProduct() {
   const { cart, setCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  console.log(product)
 
   useEffect(() => {
     const selectedProduct = products.find(

@@ -2,7 +2,7 @@
 import { useContext, useEffect, useState } from "react";
 import { CartContext, OrderContext } from "../../App";
 import { Link } from "react-router-dom";
-import "./../../App.css"
+import "./../../App.css";
 import CartItem from "./CartItem";
 import PopUp from "../PopUps/PopUp";
 
@@ -12,7 +12,6 @@ function CartItems() {
   const { setOrders, orders } = useContext(OrderContext);
   const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
   const [showPopUp, setShowPopUp] = useState(false);
-
 
   //Update total every time the cart changes
   useEffect(() => {
@@ -48,54 +47,45 @@ function CartItems() {
     return item.product.price * item.quantity;
   };
 
-  const handleCheckOut =  () => {
-
-    if(!loggedInUser){
-      setShowPopUp(true)
-      
+  const handleCheckOut = () => {
+    if (!loggedInUser) {
+      setShowPopUp(true);
+    } else {
+      placeOrder();
     }
-    else {
-      placeOrder()
-    }
-  }
+  };
 
   const placeOrder = async () => {
-       // Create a new order object
-       const newOrder = {
+    // Create a new order object
+    const newOrder = {
+      cartItems: cart,
+      user: loggedInUser,
+      total: totalPrice,
+    };
+    const token = localStorage.getItem("token");
+
+    //Post to database if the user is authenticated
+    fetch(`${API_URL}/orders`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(newOrder),
+    });
+
+    setOrders([
+      ...orders,
+      {
         cartItems: cart,
         user: loggedInUser,
-        total: totalPrice
-      };
-      const token = localStorage.getItem('token')
-  
-      //Post to database if the user is authenticated
-      try {
-        const res = await fetch(`${API_URL}}/orders`, {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
-          body: JSON.stringify(newOrder)
-        })
-        if(!res.ok){
-          console.error("Failed to add post")
-        }
-        else{
-          console.log("order succesfully added")
-        }
-      }
-      catch (error){
-        console.error('Error:', error)
-      }
-  
-      setOrders([...orders, 
-        {
-          cartItems: cart,
-          user: loggedInUser,
-          id: orders.length + 1,
-          total: totalPrice
-        }])
-      setCart([])
-      alert("Order complete")   
-  }
+        id: orders.length + 1,
+        total: totalPrice,
+      },
+    ]);
+    setCart([]);
+    alert("Order complete");
+  };
 
   return (
     <section className="cart">
@@ -120,26 +110,32 @@ function CartItems() {
           <ul className="list-unstyled">
             {cart.map((item, index) => (
               <li key={index}>
-                <CartItem item={item} calculateSubtotal={calculateSubtotal}
-                handleDecrement={() => handleDecrement(index)} 
-                handleIncrement={() => handleIncrement(index)}>
-
-                </CartItem>
+                <CartItem
+                  item={item}
+                  calculateSubtotal={calculateSubtotal}
+                  handleDecrement={() => handleDecrement(index)}
+                  handleIncrement={() => handleIncrement(index)}
+                ></CartItem>
               </li>
             ))}
             <div className="d-flex justify-content-end mt-4">
               <h4 style={{ fontWeight: "bold" }}>Total: ${totalPrice}</h4>
             </div>
             <div className="d-flex justify-content-center mt-4">
-              <button onClick={handleCheckOut} className="btn btn-dark">Check Out</button>
+              <button onClick={handleCheckOut} className="btn btn-dark">
+                Check Out
+              </button>
             </div>
           </ul>
         )}
       </div>
-      <PopUp show={showPopUp} setShow={setShowPopUp} placeOrder={() => placeOrder()}></PopUp>
+      <PopUp
+        show={showPopUp}
+        setShow={setShowPopUp}
+        placeOrder={() => placeOrder()}
+      ></PopUp>
     </section>
   );
 }
 
 export default CartItems;
-
